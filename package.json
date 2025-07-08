@@ -1,0 +1,26 @@
+{
+  "type": "module",
+  "name": "pokemon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "DB_PATH=../data/pokedex.json PORT=8080 node src/index.js",
+    "dev": "DB_PATH=../data/pokedex.json PORT=8080 nodemon --inspect --watch src --exec 'node' src/index.js",
+    "test:static": "eslint .",
+    "test:static:fix": "eslint . --fix"
+  },
+  "author": "",
+  "license": "SEE LICENSE IN license.md",
+  "devDependencies": {
+    "@eslint/js": "^9.30.1",
+    "eslint": "^9.30.1",
+    "globals": "^16.3.0",
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "express": "^5.1.0",
+    "swagger-ui-express": "^5.0.1"
+  }
+}

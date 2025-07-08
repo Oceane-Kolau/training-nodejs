@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="ejs.js"></script>
+  <title>Liste de Pokémon</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6fa;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff414d;
+    }
+
+    .pokemon-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pokemon-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 150px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .pokemon-card:hover {
+      transform: scale(1.05);
+    }
+
+    .pokemon-card img {
+      width: 100px;
+      margin-top: 10px;
+    }
+
+    .pokemon-name {
+      font-weight: bold;
+      margin: 10px 0;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1><%= title %></h1>
+  <ul class="pokemon-list">
+  <% pokemons.forEach(function(pokemon) { %>
+    <li class="pokemon-card">
+      <img src="<%= pokemon.picture %>" alt="<%= pokemon.name %>">
+      <div class="pokemon-name"><%= pokemon.name %></div>
+    </li>
+  <% }); %>
+</ul>
+</body>
+</html>

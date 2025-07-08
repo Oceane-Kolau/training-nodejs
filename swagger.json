@@ -1,0 +1,172 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "version": "1.0.0",
+    "title": "Node.js Formation"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080"
+    }
+  ],
+  "tags": [
+    {
+      "name": "pokemon",
+      "description": "Everything about Pokemon species"
+    },
+    {
+      "name": "capturedPokemon",
+      "description": "the pokemon you own"
+    }
+  ],
+  "paths": {
+    "/pokemon": {
+      "get": {
+        "tags": ["pokemon"],
+        "summary": "Get all existing pokemons",
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/pokemon/{id}/capture": {
+      "post": {
+        "tags": ["capturedPokemon", "pokemon"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the pokemon to be released",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Catpure a pokemon",
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/capturedPokemon": {
+      "get": {
+        "tags": ["capturedPokemon"],
+        "summary": "Get all captured pokemon",
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/capturedPokemon/{id}/evolve": {
+      "post": {
+        "tags": ["capturedPokemon"],
+        "summary": "make the pokemon evolve",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the pokemon to be released",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/capturedPokemon/{id}": {
+      "patch": {
+        "tags": ["capturedPokemon"],
+        "summary": "release a pokemon in the wild",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the pokemon to be released",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the pokemon"
+                  },
+                  "cp": {
+                    "type": "integer",
+                    "description": "Combat points of the pokemon"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["capturedPokemon"],
+        "summary": "release a pokemon in the wild",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the pokemon to be released",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      },
+      "get": {
+        "tags": ["capturedPokemon"],
+        "summary": "Get one captured pokemon",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the pokemon to be released",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    }
+  }
+}
