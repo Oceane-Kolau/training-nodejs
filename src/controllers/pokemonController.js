@@ -5,8 +5,11 @@ export const getAll = async (req, res) => {
   try {
     const pokemonList = await getAllPokemons();
     if (pokemonList && pokemonList.length > 0) {
-      console.log(pokemonList); // Debugging line to check the fetched data
-      res.render("pokemons", { pokemons: pokemonList, title: "Pokédex" });
+      res.render("pokemons", {
+        pokemons: pokemonList,
+        title: "Pokédex",
+        captured: false,
+      });
       // res.status(200).json(pokemonList);
     } else {
       res.status(404).json({ error: "No data found" });

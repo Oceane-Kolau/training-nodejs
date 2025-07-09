@@ -23,11 +23,10 @@ const logFile = () => {
 
       // Add a 5-second delay
       setTimeout(() => {
-        console.log("Contents of pokedex.json:", contents);
         resolve(contents);
       }, 5000);
     } catch (err) {
-      console.error("Error reading pokedex.json:", err.message);
+      console.error("💥 Error reading pokedex.json:", err.message);
       reject(err);
     }
   });

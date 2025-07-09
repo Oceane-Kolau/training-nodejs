@@ -8,7 +8,11 @@ import {
 export const list = (req, res) => {
   try {
     const pokemons = getAllCapturedPokemons();
-    res.render("pokemons", { pokemons: pokemons, title: "Pokédex" });
+    res.render("pokemons", {
+      pokemons: pokemons,
+      title: "Pokédex",
+      captured: true,
+    });
     // res.status(200).json(pokemons);
   } catch (err) {
     res.status(500).json({ error: "Database error", details: err.message });
