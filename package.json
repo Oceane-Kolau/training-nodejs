@@ -7,8 +7,8 @@
   "scripts": {
     "start": "DB_PATH=../data/pokedex.json PORT=8080 node src/index.js",
     "dev": "DB_PATH=../data/pokedex.json PORT=8080 nodemon --inspect --watch src --exec 'node' src/index.js",
-    "test": "vitest run",
-    "test:watch": "vitest",
+    "test": "DB_PATH=../data/pokedex.json vitest run",
+    "test:watch": "DB_PATH=../data/pokedex.json vitest",
     "test:static": "eslint .",
     "test:static:fix": "eslint . --fix"
   },

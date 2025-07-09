@@ -5,6 +5,7 @@ dist/
 build/
 coverage/
 *.sqlite
+src/data/database.sqlite
 *.env
 .env.*
 tmp/

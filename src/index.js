@@ -31,10 +31,6 @@ process.on("exit", (code) => {
 // Définir le moteur de vue sur EJS
 app.set('view engine', 'ejs').set('views', path.join(__dirname, 'templates'));
 
-app.use((req, res, next) => {
-  req.insertCapturedPokemon = insertCapturedPokemon;
-  next();
-});
 
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
   .use(express.json())
@@ -60,7 +56,10 @@ app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.use("/pokemon", pokemonRoutes);
 app.use("/capturedPokemon", capturedPokemonRoutes);
-
+app.use((err, req, res, next) => {
+  console.error('Express error:', err);
+  res.status(500).send('Internal Server Error');
+});
 if (process.env.NODE_ENV !== 'test') {
   app.listen(process.env.PORT, () => {
      console.log(`Server is running on http://localhost:${process.env.PORT}`);
