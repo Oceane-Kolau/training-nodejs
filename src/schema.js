@@ -2,10 +2,9 @@
 import Ajv from "ajv";
 
 const ajv = new Ajv({ allErrors: true, strict: false });
-
 const pokemonSchema = {
   type: "array",
-  required: ["id", "name", "hp", "pictures", "cp", "types", "created"],
+  required: ["id", "name", "hp", "picture", "cp", "types", "created"],
   additionalProperties: false,
   items: {
     type: "object",
@@ -14,7 +13,7 @@ const pokemonSchema = {
       name: { type: "string" },
       hp: { type: "number" },
       cp: { type: "number" },
-      pictures: { type: "string" },
+      picture: { type: "string" },
       types: {
         type: "array",
         items: {
@@ -22,10 +21,10 @@ const pokemonSchema = {
         },
       },
       created: {
-        type: "string",
-      },
+        type: "string" },
     },
   },
 };
+  
 
 export const validatePokemon = ajv.compile(pokemonSchema);
