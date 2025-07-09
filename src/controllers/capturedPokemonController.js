@@ -3,7 +3,21 @@ import {
   getAllCapturedPokemons,
   getCapturedPokemonById,
   updateCapturedPokemon,
+  deleteCapturedPokemonById,
 } from "../repositories/capturedPokemonRepository.js";
+export const deleteCapturedPokemon = (req, res) => {
+  const id = req.params.id;
+  try {
+    const deleted = deleteCapturedPokemonById(id);
+    if (deleted.changes > 0) {
+      res.json({ success: true });
+    } else {
+      res.status(404).json({ success: false, error: "Not found" });
+    }
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+};
 
 export const list = (req, res) => {
   try {

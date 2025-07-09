@@ -8,9 +8,13 @@ import {
 
 const router = express.Router();
 
+
+import { deleteCapturedPokemon } from "../controllers/capturedPokemonController.js";
+
 router.post("/capture", capture);
 router.post("/id", getCapturedPokemonId);
 router.get("/", list);
 router.post("/:id/evolve", evolve);
+router.delete("/:id", deleteCapturedPokemon);
 
 export default router;

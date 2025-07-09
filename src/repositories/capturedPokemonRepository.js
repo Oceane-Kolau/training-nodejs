@@ -1,3 +1,7 @@
+
+export const deleteCapturedPokemonById = (id) => {
+  return db.prepare("DELETE FROM capturedPokemons WHERE id = ?").run(id);
+};
 import db from "../db.js";
 
 export const insertCapturedPokemon = (pokemon) => {

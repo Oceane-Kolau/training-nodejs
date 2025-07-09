@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,8 +19,8 @@
 
     .side-captured {
       width: 260px;
-      background: rgba(255,255,255,0.25);
-      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       border-radius: 20px;
@@ -32,27 +33,31 @@
       flex-direction: column;
       align-items: center;
     }
+
     .side-captured h2 {
       font-size: 1.2em;
       margin-bottom: 10px;
       color: #ff414d;
     }
+
     .side-captured .captured-list {
       width: 100%;
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
+
     .side-captured .captured-card {
-      background: rgba(255,255,255,0.5);
+      background: rgba(255, 255, 255, 0.5);
       border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       padding: 8px 6px;
       display: flex;
       align-items: center;
       gap: 10px;
       font-size: 0.95em;
     }
+
     .side-captured .captured-card img {
       width: 40px;
       border-radius: 8px;
@@ -83,33 +88,36 @@
     }
 
     .pokemon-card {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.25);
       border-radius: 18px;
-      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.17);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.17);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
       width: 210px;
       min-height: 320px;
       text-align: center;
       transition: transform 0.2s ease, box-shadow 0.2s;
-      border: 1px solid rgba(255,255,255,0.18);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       padding: 18px 10px 16px 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
     }
+
     .pokemon-card:hover {
       transform: scale(1.04);
-      box-shadow: 0 12px 32px 0 rgba(31,38,135,0.25);
+      box-shadow: 0 12px 32px 0 rgba(31, 38, 135, 0.25);
     }
+
     .pokemon-card img {
       width: 110px;
       margin-top: 0;
       border-radius: 12px;
       background: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
     }
+
     .pokemon-name {
       font-weight: bold;
       margin: 12px 0 6px 0;
@@ -121,18 +129,20 @@
       justify-content: center;
       gap: 6px;
     }
+
     .pokemon-types {
       display: flex;
       gap: 6px;
       justify-content: center;
       margin-bottom: 8px;
     }
+
     .pokemon-type {
       font-size: 1.08em;
       padding: 3px 14px 3px 10px;
       border-radius: 999px;
       background: linear-gradient(90deg, #f8fafc 0%, #e0e7ef 100%);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
       margin-bottom: 2px;
       margin-right: 4px;
       display: inline-flex;
@@ -143,27 +153,32 @@
       color: #444;
       transition: background 0.2s, color 0.2s;
     }
+
     .pokemon-type:hover {
       background: linear-gradient(90deg, #ffe5ec 0%, #e0e7ef 100%);
       color: #ff414d;
     }
+
     .pokemon-stats {
       display: flex;
       justify-content: center;
       gap: 12px;
       margin-bottom: 8px;
     }
+
     .pokemon-stat {
       font-size: 1.05em;
       display: flex;
       align-items: center;
       gap: 3px;
     }
+
     .pokemon-date {
       font-size: 0.85em;
       color: #888;
       margin-bottom: 6px;
     }
+
     .capture-btn {
       margin-top: 10px;
       padding: 7px 18px;
@@ -174,72 +189,73 @@
       font-weight: bold;
       cursor: pointer;
       font-size: 1em;
-      box-shadow: 0 2px 8px rgba(255,65,77,0.08);
+      box-shadow: 0 2px 8px rgba(255, 65, 77, 0.08);
       transition: background 0.2s;
     }
+
     .capture-btn:hover {
       background: #e12c3a;
     }
   </style>
 </head>
+
 <body>
-  <div class="side-captured" id="side-captured">
-    <h2>🎒 Captured</h2>
-    <div class="captured-list" id="captured-list">
-      <!-- Dynamically filled -->
+  <% if (!captured) { %>
+    <div class="side-captured" id="side-captured">
+      <h2>🎒 Captured</h2>
+      <div class="captured-list" id="captured-list">
+        <!-- Dynamically filled -->
+      </div>
     </div>
-  </div>
-  <div class="main-content">
-    <h1><%= title %></h1>
-    <ul class="pokemon-list">
-    <% pokemons.forEach(function(pokemon) { %>
-      <li class="pokemon-card" data-id="<%= pokemon.id %>">
-        <img src="<%= pokemon.picture %>" alt="<%= pokemon.name %>">
-        <div class="pokemon-name">
-          <%= pokemon.name %>
-        </div>
-        <div class="pokemon-types">
-          <% 
-            let typesArr;
-            if (Array.isArray(pokemon.types)) {
-              typesArr = pokemon.types;
-            } else if (typeof pokemon.types === 'string') {
-              try {
-                typesArr = JSON.parse(pokemon.types);
-                if (!Array.isArray(typesArr)) typesArr = [pokemon.types];
-              } catch {
-                typesArr = [pokemon.types];
-              }
-            } else {
-              typesArr = [];
-            }
-          %>
-          <% typesArr.forEach(function(type) { %>
-            <span class="pokemon-type"><%= type %> <%= {
-              Fire: '🔥', Water: '💧', Grass: '🌱', Electric: '⚡', Bug: '🐞', Normal: '⚪', Poison: '☠️', Ground: '🌍', Fairy: '🧚', Fighting: '🥊', Psychic: '🔮', Rock: '🪨', Ghost: '👻', Ice: '❄️', Dragon: '🐉', Flying: '🕊️', Steel: '⚙️', Dark: '🌑',
-              Plante: '🌱', Eau: '💧', Feu: '🔥', Insecte: '🐞', Vol: '🕊️', Fée: '🧚', Electrik: '⚡'
-            }[type] || '' %></span>
-          <% }); %>
-        </div>
-        <div class="pokemon-stats">
-          <span class="pokemon-stat">❤️ <%= pokemon.hp %></span>
-          <span class="pokemon-stat">💪 <%= pokemon.cp %></span>
-        </div>
-        <% if (pokemon.created) { %>
-          <div class="pokemon-date">🕒 <%= new Date(pokemon.created).toLocaleDateString() %></div>
-        <% } %>
-        <button class="capture-btn" data-id="<%= pokemon.id %>">Capturer</button>
-      </li>
-    <% }); %>
-    </ul>
-  </div>
+    <% } %>
+      <div class="main-content">
+        <h1>
+          <%= title %>
+        </h1>
+        <ul class="pokemon-list">
+          <% pokemons.forEach(function(pokemon) { %>
+            <li class="pokemon-card" data-id="<%= pokemon.id %>">
+              <img src="<%= pokemon.picture %>" alt="<%= pokemon.name %>">
+              <div class="pokemon-name">
+                <%= pokemon.name %>
+              </div>
+              <div class="pokemon-types">
+                <% let typesArr; if (Array.isArray(pokemon.types)) { typesArr=pokemon.types; } else if (typeof
+                  pokemon.types==='string' ) { try { typesArr=JSON.parse(pokemon.types); if (!Array.isArray(typesArr))
+                  typesArr=[pokemon.types]; } catch { typesArr=[pokemon.types]; } } else { typesArr=[]; } %>
+                  <% typesArr.forEach(function(type) { %>
+                    <span class="pokemon-type">
+                      <%= type %>
+                        <%= { Fire: '🔥' , Water: '💧' , Grass: '🌱' , Electric: '⚡' , Bug: '🐞' , Normal: '⚪' ,
+                          Poison: '☠️' , Ground: '🌍' , Fairy: '🧚' , Fighting: '🥊' , Psychic: '🔮' , Rock: '🪨' ,
+                          Ghost: '👻' , Ice: '❄️' , Dragon: '🐉' , Flying: '🕊️' , Steel: '⚙️' , Dark: '🌑' ,
+                          Plante: '🌱' , Eau: '💧' , Feu: '🔥' , Insecte: '🐞' , Vol: '🕊️' , Fée: '🧚' , Electrik: '⚡'
+                          }[type] || '' %>
+                    </span>
+                    <% }); %>
+              </div>
+              <div class="pokemon-stats">
+                <span class="pokemon-stat">❤️ <%= pokemon.hp %></span>
+                <span class="pokemon-stat">💪 <%= pokemon.cp %></span>
+              </div>
+              <% if (pokemon.created) { %>
+                <div class="pokemon-date">🕒 <%= new Date(pokemon.created).toLocaleDateString() %>
+                </div>
+                <% } %>
+                  <% if (!captured) { %>
+                    <button class="capture-btn" data-id="<%= pokemon.id %>">Capturer</button>
+                    <% } %>
+            </li>
+            <% }); %>
+        </ul>
+      </div>
 </body>
 <script>
   // --- Glassmorphism + Dynamic Side Card JS ---
   const capturedList = document.getElementById('captured-list');
   let capturedPokemons = [];
 
-  function renderCaptured() {
+  const renderCaptured = () => {
     capturedList.innerHTML = '';
     capturedPokemons.forEach(p => {
       const card = document.createElement('div');
@@ -250,23 +266,49 @@
       };
       let typeStr = '';
       if (p.types && p.types.length) {
-        // Supporte array ou string unique
         let arr = Array.isArray(p.types) ? p.types : (typeof p.types === 'string' ? [p.types] : []);
-        typeStr = arr.map(function(t) { return (typeEmojis[t] || ''); }).join(' ');
+        typeStr = arr.map(function (t) { return (typeEmojis[t] || ''); }).join(' ');
       }
       card.innerHTML = `
         <img src="${p.picture}" alt="${p.name}">
         <span>${p.name}</span>
         <span>${typeStr}</span>
+        <button class="delete-captured-btn" data-id="${p.id}" style="margin-left:10px;background:#eee;color:#ff414d;border:1px solid #ff414d;padding:3px 10px;border-radius:6px;cursor:pointer;font-size:0.95em;">✖</button>
       `;
       capturedList.appendChild(card);
+    });
+    // Add event listeners for delete buttons
+    document.querySelectorAll('.delete-captured-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const id = this.getAttribute('data-id');
+        fetch(`/capturedPokemon/${id}`, { method: 'DELETE' })
+          .then(r => r.json())
+          .then(result => {
+            if (result && result.success) {
+              // Remove from local array and re-render
+              capturedPokemons = capturedPokemons.filter(p => String(p.id) !== String(id));
+              renderCaptured();
+            } else if (result && result.error === "Not found") {
+              // Already deleted, just remove from UI
+              capturedPokemons = capturedPokemons.filter(p => String(p.id) !== String(id));
+              renderCaptured();
+            } else {
+              alert('Erreur lors de la suppression');
+            }
+          })
+          .catch(() => {
+            // If error (network or 404), remove from UI anyway
+            capturedPokemons = capturedPokemons.filter(p => String(p.id) !== String(id));
+            renderCaptured();
+          });
+      });
     });
   }
 
   // Ajout d'un eventListener pour tous les boutons "Capturer"
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.capture-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function () {
         const id = this.getAttribute('data-id');
         fetch(`/pokemon/${id}/capture`, { method: 'POST' })
           .then(r => r.json())
@@ -283,4 +325,5 @@
     });
   });
 </script>
+
 </html>
