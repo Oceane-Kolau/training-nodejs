@@ -61,7 +61,11 @@ app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use("/pokemon", pokemonRoutes);
 app.use("/capturedPokemon", capturedPokemonRoutes);
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running on http://localhost:${process.env.PORT}`);
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(process.env.PORT, () => {
+     console.log(`Server is running on http://localhost:${process.env.PORT}`);
   console.log(`Swagger-UI is available at http://localhost:${process.env.PORT}/doc`);
-});
+  });
+}
+
+export default app;
